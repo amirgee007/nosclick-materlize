@@ -18,10 +18,16 @@
                             <ul class="nav nav-pills nav-pills-icons nav-pills-primary nav-stacked" role="tablist">
 
                                <li class="active">
-                                   <a href="#instant" role="tab" data-toggle="tab">
-                                        <i class="material-icons">flash_on</i>Dépôt instantané
+                                   <a href="#instant_stripe" role="tab" data-toggle="tab">
+                                        <i class="material-icons">flash_on</i>Stripe
                                     </a>
                                 </li>
+                                <li class="">
+                                    <a href="#instant_payeer" role="tab" data-toggle="tab">
+                                        <i class="material-icons">flash_on</i>Payeer
+                                    </a>
+                                </li>
+
                                 <li>
                                     <a href="#local" role="tab" data-toggle="tab">
                                         <i class="material-icons">flash_on</i>Dépôt différé
@@ -31,16 +37,19 @@
                         </div>
                         <div class="col-md-9">
                             <div class="tab-content">
-                               <div class="tab-pane active" id="instant">
 
-
+                                <div class="tab-pane active" id="instant_stripe">
                                     <div class="alert alert-info alert-with-icon">
 									<i class="material-icons" data-notify="icon">notifications</i>
                                         <!--<span class="text-left">Les frais de transaction sont les suivants :</span><br>-->
                                        @foreach($gateways as $gateway)
+                                           @if($gateway->name=='Stripe')
                                             <span><div class="card" style="width:40%" ><img src="{{$gateway->image}}"/></div> <br>  {{$gateway->id}}. <b>{{$gateway->name}}</b> vous facture <b>€ {{$gateway->fixed}}</b> fixe + <b>{{$gateway->percent}}%</b></span>
+                                            @endif
                                         @endforeach
+
                                     </div>
+
 
                                     <form action="{{route('instantPreview')}}" method="post">
                                         {{ csrf_field() }}
@@ -48,12 +57,10 @@
                                             <div class="alert alert-danger alert-with-icon" data-notify="container">
                                                 <i class="material-icons" data-notify="icon">notifications</i>
                                                 <span data-notify="message">
-
-                                    @foreach($errors->all() as $error)
+                                                    @foreach($errors->all() as $error)
                                                         <li><strong> {{$error}} </strong></li>
                                                     @endforeach
-
-                            </span>
+                                                </span>
                                             </div>
                                             <br>
                                         @endif
@@ -62,9 +69,10 @@
                                             <div class="col-md-6 col-md-offset-1">
                                                 <div class="form-group label-floating">
                                                     <select class="selectpicker" name="gateway" data-style="btn btn-warning btn-round" title="Processeur de paiement" data-size="7">
-
                                                         @foreach($gateways as $gateway)
-                                                            <option value="{{$gateway->id}}">{{$gateway->name}}</option>
+                                                            @if($gateway->name=='Stripe')
+                                                            <option selected value="{{$gateway->id}}">{{$gateway->name}}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -79,23 +87,80 @@
                                                 <div class="form-group label-floating">
                                                     <label  class="control-label" for="amount">Montant du dépôt</label>
                                                     <input id="amount" name="amount" type="text" class="form-control">
-
                                                 </div>
                                             </div>
                                         </div>
                                         <br><br>
 										<button type="submit" class="btn btn-success pull-right">Valider</button>
                                         <a href="{{route('userDeposits')}}" class="btn btn-rose pull-right">Annuler</a>
-
-                                        
                                         <div class="clearfix"></div>
                                     </form>
 
 
                                 </div>
+
+                                <div class="tab-pane active" id="instant_payeer">
+                                    <div class="alert alert-info alert-with-icon">
+                                        <i class="material-icons" data-notify="icon">notifications</i>
+                                        <!--<span class="text-left">Les frais de transaction sont les suivants :</span><br>-->
+                                        @foreach($gateways as $gateway)
+                                            @if($gateway->name=='Payeer')
+                                                <span><div class="card" style="width:40%" ><img src="{{$gateway->image}}"/></div> <br>  {{$gateway->id}}. <b>{{$gateway->name}}</b> vous facture <b>€ {{$gateway->fixed}}</b> fixe + <b>{{$gateway->percent}}%</b></span>
+                                            @endif
+                                        @endforeach
+
+                                    </div>
+
+
+                                    <form action="{{route('instantPreview')}}" method="post">
+                                        {{ csrf_field() }}
+                                        @if(count($errors) > 0)
+                                            <div class="alert alert-danger alert-with-icon" data-notify="container">
+                                                <i class="material-icons" data-notify="icon">notifications</i>
+                                                <span data-notify="message">
+                                                    @foreach($errors->all() as $error)
+                                                        <li><strong> {{$error}} </strong></li>
+                                                    @endforeach
+                                                </span>
+                                            </div>
+                                            <br>
+                                        @endif
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-md-offset-1">
+                                                <div class="form-group label-floating">
+                                                    <select class="selectpicker" name="gateway" data-style="btn btn-warning btn-round" title="Processeur de paiement" data-size="7">
+                                                        @foreach($gateways as $gateway)
+                                                            @if($gateway->name=='Payeer')
+                                                                <option selected value="{{$gateway->id}}">{{$gateway->name}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6 col-md-offset-1">
+                                                <div class="form-group label-floating">
+                                                    <label  class="control-label" for="amount">Montant du dépôt</label>
+                                                    <input id="amount" name="amount" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br><br>
+                                        <button type="submit" class="btn btn-success pull-right">Valider</button>
+                                        <a href="{{route('userDeposits')}}" class="btn btn-rose pull-right">Annuler</a>
+                                        <div class="clearfix"></div>
+                                    </form>
+
+
+                                </div>
+
+
+
                                 <div class="tab-pane" id="local">
-
-
                                     <div class="alert alert-info alert-with-icon">
 									<i class="material-icons" data-notify="icon">notifications</i>
                                         <!--<span class="text-left">Les frais de transaction sont les suivants :</span><br>-->
@@ -113,11 +178,11 @@
                                                 <i class="material-icons" data-notify="icon">notifications</i>
                                                 <span data-notify="message">
 
-                                    @foreach($errors->all() as $error)
+                                                    @foreach($errors->all() as $error)
                                                         <li><strong> {{$error}} </strong></li>
                                                     @endforeach
 
-                            </span>
+                                                </span>
                                             </div>
                                             <br>
                                         @endif
@@ -153,14 +218,9 @@
                                         <br>
                                         <br>
 										<button type="submit" class="btn btn-success pull-right">Valider</button>
-                                        <a href="{{route('userDeposits')}}" class="btn btn-rose pull-right">Annuler</a> 
-
-                                        
+                                        <a href="{{route('userDeposits')}}" class="btn btn-rose pull-right">Annuler</a>
                                         <div class="clearfix"></div>
                                     </form>
-
-
-
 
                                     </div>
                             </div>
@@ -168,12 +228,7 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
-
-        
 
           <div class="col-md-3">
                 <div class="card card-content">

@@ -12,6 +12,9 @@
 */
 
 
+Route::get('/test', 'TestController@index')->name('test');
+
+
 Auth::routes();
 
 Route::get('/', 'GuestController@index')->name('welcome');

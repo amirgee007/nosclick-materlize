@@ -104,10 +104,7 @@ class UserDepositsController extends Controller
             session()->flash('message', 'Le minimum est de € ' . $settings->minimum_deposit . '  ');
             Session::flash('type', 'error');
             Session::flash('title', 'Minimum Deposit');
-
             return redirect(route('userDeposit.create'));
-
-
         }
 
         $gateway = Gateway::find($request->gateway);
@@ -122,7 +119,6 @@ class UserDepositsController extends Controller
 
         $user = Auth::user();
 
-
         $deposit = (object)array(
 
             'amount' => $request->amount,
@@ -135,8 +131,35 @@ class UserDepositsController extends Controller
         $user->save;
 
 
+        if ($gateway->name=='Payeer'){
+            $payeer = $this->makeParamForPayeer($gateway,$user,$deposit);
+            return view('user.deposit.instant_payeer',compact('gateway','user','deposit' ,'payeer'));
+        }
+
         return view('user.deposit.instant', compact('gateway', 'user', 'deposit'));
 
+    }
+
+    public function makeParamForPayeer($gateway,$user,$deposit){
+
+        $payeer = [];
+        $payeer['m_shop']   =   config('payeer.m_shop');   //   merchant   ID
+        $payeer['m_orderid']   =   $user->d_code;   //   invoice   number   in   the   merchant's   invoicing   system
+        $payeer['m_amount']   =   number_format($deposit->amount,   2,   '.',   '');   //   invoice   amount   with   two   decimal   places following   a   period
+        $payeer['m_curr']   =   'EUR';   //   invoice   currency
+        $payeer['m_desc']   =   base64_encode($user->d_code);   //   invoice   description   encoded   using   a   base64 algorithm
+        $m_key   =   config('payeer.m_key');
+
+        //   Forming   an   array   for   signature   generation
+        $arHash   =   array( $payeer['m_shop'], $payeer['m_orderid'], $payeer['m_amount'], $payeer['m_curr'], $payeer['m_desc']  );
+
+        //   Adding   the   secret   key   to   the   signature-formation   array
+        $arHash[]   =   $m_key;
+
+        //   Forming   a   signature
+        $payeer['sign']=   strtoupper(hash('sha256',   implode(':',   $arHash)));
+
+        return $payeer;
     }
 
     public function paymentPreview(Request $request)
@@ -186,10 +209,11 @@ class UserDepositsController extends Controller
         $user->save;
 
 
-
         return view('user.deposit.preview',compact('gateway','user','deposit'));
 
     }
+
+
     public function stripeConfirm(Request $request)
     {
         $gateway = Gateway::find(2);
@@ -254,13 +278,11 @@ class UserDepositsController extends Controller
 
             return redirect(route('userDeposit.create'));
 
-
         }
 
         $gateway= Gateway::find($request->gateway);
 
         if ($gateway->id == 1){
-
 
             $payer = new Payer();
             $payer->setPaymentMethod('paypal');
@@ -374,7 +396,6 @@ class UserDepositsController extends Controller
 
     }
 
-
     public function getPaypalStatuscopy(Request $request)
     {
 
@@ -385,8 +406,6 @@ class UserDepositsController extends Controller
         return redirect()->route('userDashboard');
 
     }
-
-
 
     public function getPaypalStatus()
     {
@@ -459,5 +478,4 @@ class UserDepositsController extends Controller
 
         return redirect(route('userDeposit.create'));
     }
-    //
 }

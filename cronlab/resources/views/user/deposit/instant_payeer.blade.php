@@ -1,8 +1,6 @@
 @extends('layouts.dashboard')
 @section('title', 'Dépôts sur votre compte')
 @section('content')
-
-
     <div class="row">
         <div class="col-md-12 col-md-offset-0">
             <div class="card card-content">
@@ -23,23 +21,24 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-5">
-                        <form action="{{route('stripeConfirm')}}" method="POST">
+                        <form action="{{config('payeer.url')}}" method="POST">
                             {{csrf_field()}}
-                                <script
-                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="{{$gateway->val1}}"
-                                    data-amount="{{$deposit->amount * 100}}"
-                                    data-name="NOSCLICK"
-                                    data-description="Veuillez remplir les informations"
-                                    data-image="https://nosclick.com/img/marketplace.png"
-                                    data-locale="fr"
-                                    data-currency="EUR">
-                                    </script>
-                                            <input type="hidden" name="code" value="{{$deposit->code}}">
-                                            <input type="hidden" name="amount" value="{{$deposit->amount}}">
-                                            <input type="hidden" name="user_id" value="{{$user->id}}">
+
+                                <input   type="hidden"   name="m_shop"   value="{{$payeer['m_shop']}}">
+                                <input   type="hidden"   name="m_orderid"   value="{{$payeer['m_orderid']}}">
+                                <input   type="hidden"   name="m_amount"   value="{{$payeer['m_amount']}}">
+                                <input   type="hidden"   name="m_curr"   value="{{$payeer['m_curr']}}">
+                                <input   type="hidden"   name="m_desc"   value="{{$payeer['m_desc']}}">
+                                <input   type="hidden"   name="m_sign"   value="{{$payeer['sign']}}">
+                                <input   type="hidden"   name="form[curr[2609]]"   value="USD">
+                                <input   type="hidden"   name="m_cipher_method"   value="AES-256-CBC">
+
+                                <input data-image="https://nosclick.com/img/marketplace.png"
+                                       data-locale="fr"
+                                       data-currency="EUR" class="btn btn-info"  data-description="Veuillez remplir les informations" type="submit" name="m_process" value="Pay with Card"/>
                         </form>
                         <br><br>
 						</div>
