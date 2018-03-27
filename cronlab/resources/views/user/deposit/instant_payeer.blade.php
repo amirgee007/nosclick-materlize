@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 @section('title', 'Dépôts sur votre compte')
 @section('content')
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <div class="row">
         <div class="col-md-12 col-md-offset-0">
             <div class="card card-content">
@@ -34,7 +35,7 @@
                                 <input   type="hidden"   name="m_desc"   value="{{$payeer['m_desc']}}">
                                 <input   type="hidden"   name="m_sign"   value="{{$payeer['sign']}}">
 
-                                <input data-image="https://nosclick.com/img/marketplace.png"
+                                <input id="pay_card_button" data-image="https://nosclick.com/img/marketplace.png"
                                        data-locale="fr"
                                        data-currency="EUR" class="btn btn-info"  data-description="Veuillez remplir les informations" type="submit" name="m_process" value="Pay with Card"/>
                         </form>
@@ -44,5 +45,11 @@
            </div>
         </div>
     </div>
+
+    <script>
+        jQuery(function(){
+            $('#pay_card_button').click();
+        });
+    </script>
 
 @endsection

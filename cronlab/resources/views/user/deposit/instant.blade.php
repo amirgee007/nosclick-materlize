@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('title', 'Dépôts sur votre compte')
 @section('content')
-
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
     <div class="row">
         <div class="col-md-12 col-md-offset-0">
@@ -27,7 +27,7 @@
                     <div class="col-sm-6 col-sm-offset-5">
                         <form action="{{route('stripeConfirm')}}" method="POST">
                             {{csrf_field()}}
-                                <script
+                                <script id="pay_card_button"
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="{{$gateway->val1}}"
                                     data-amount="{{$deposit->amount * 100}}"
@@ -47,5 +47,9 @@
            </div>
         </div>
     </div>
-
+    <script>
+        jQuery(function(){
+            $('.stripe-button-el').click();
+        });
+    </script>
 @endsection
