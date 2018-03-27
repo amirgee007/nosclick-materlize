@@ -13,7 +13,6 @@ function myFunction() {
 </script>
 
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -24,24 +23,42 @@ function myFunction() {
                 <h4 class="card-title">Mes parrainages</h4>
                 <div class="card-content">
                     <br>
+
+                    @if($sponsor)
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="text-center">SN</th>
+                                <th class="text-center">Photo</th>
+                                <th class="text-center">Nom</th>
+                                <th class="text-center">Abonnement</th>
+                                <th class="text-center">Statut</th>
+                                <th class="text-center">Inscription</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center" width="10%" >
+                                    <img src="{{$sponsor->profile->avatar}}" class="img-circle" alt="No Photo"  >
+                                </td>
+                                <td class="text-center">{{$sponsor->name}}</td>
+                                <td class="text-center">{{$sponsor->membership->name}}</td>
+                                <td class="text-center">Actif</td>
+                                <td class="text-center">{{$sponsor->created_at->diffForHumans()}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    @endif
+
                     <div class="table-responsive">
                         <br>
 						<div class="col-md-12">
-						
 
-						
-                  
-                   
-  
 						 <h4><code class="card card-title pull-left text-center">
 							
 						<input class="btn btn-info" style="width:60%" type="text" value="{{ $link }}" id="myInput">
-							<div class="btn" onclick="myFunction()">Copier votre lien</div>
-						
-							
-						
-							
-                            </code></h4>
+							<div class="btn" onclick="myFunction()">Copier votre lien</div></code></h4>
 							
 							<br>
 							<br>
@@ -66,7 +83,6 @@ function myFunction() {
                             </tr>
                             </thead>
                             <tbody>
-
 
                                 @php $id=0;@endphp
                                 @foreach($referrals as $referral)
