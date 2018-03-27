@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-5">
                         <form action="{{config('payeer.url')}}" method="POST">
-                            {{csrf_field()}}
+                            {{--{{csrf_field()}}--}}
 
                                 <input   type="hidden"   name="m_shop"   value="{{$payeer['m_shop']}}">
                                 <input   type="hidden"   name="m_orderid"   value="{{$payeer['m_orderid']}}">
@@ -33,8 +33,6 @@
                                 <input   type="hidden"   name="m_curr"   value="{{$payeer['m_curr']}}">
                                 <input   type="hidden"   name="m_desc"   value="{{$payeer['m_desc']}}">
                                 <input   type="hidden"   name="m_sign"   value="{{$payeer['sign']}}">
-                                <input   type="hidden"   name="form[curr[2609]]"   value="USD">
-                                <input   type="hidden"   name="m_cipher_method"   value="AES-256-CBC">
 
                                 <input data-image="https://nosclick.com/img/marketplace.png"
                                        data-locale="fr"
