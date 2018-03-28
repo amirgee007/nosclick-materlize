@@ -24,7 +24,7 @@ function myFunction() {
                     <br>
 
                     @if($sponsor)
-                        <table class="table table-responsive">
+                        <table class="table-responsive">
                             <thead>
                             <tr>
                                 <th class="text-center">SN</th>
