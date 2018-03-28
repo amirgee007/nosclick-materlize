@@ -12,7 +12,6 @@ function myFunction() {
 }
 </script>
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -25,7 +24,7 @@ function myFunction() {
                     <br>
 
                     @if($sponsor)
-                        <table class="table">
+                        <table class="table table-responsive">
                             <thead>
                             <tr>
                                 <th class="text-center">SN</th>
