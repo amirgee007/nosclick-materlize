@@ -17,7 +17,7 @@
 
                 @if (Auth::guest())
 					
-					<li><a href="https://pro.nosclick.com"> <i class="material-icons">work</i> nosclick pro</a></li>
+					<!--<li><a href="https://pro.nosclick.com"> <i class="material-icons">work</i> nosclick pro</a></li>-->
                     <li><a href="{{ url('/contact-us') }}"> <i class="material-icons">contact_mail</i> Contact</a></li>
                     <li><a href="{{ route('login') }}"> <i class="material-icons">fingerprint</i> S'identifier</a></li>
                     <li><a href="{{ route('register') }}"><i class="material-icons">subscriptions</i> S'inscrire</a></li>

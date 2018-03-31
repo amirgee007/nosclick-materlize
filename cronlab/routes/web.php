@@ -11,9 +11,7 @@
 |
 */
 
-
-Route::get('/test', 'TestController@index')->name('test');
-
+//Route::post('/create', 'Auth\RegisterController@create');
 
 Auth::routes();
 

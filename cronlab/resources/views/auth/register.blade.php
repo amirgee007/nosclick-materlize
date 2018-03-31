@@ -1,144 +1,205 @@
 
-@extends('layouts.app')
-@section('title', 'Inscrivez-vous')
-@section('content')
+<html lang="en">
+<head>
+	<title>nosclick - Inscrivez-vous</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="img/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main1.css">
+<!--===============================================================================================-->
+</head>
+<body style="background-color: #666666;">
+	 
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
 
-    <div class="container">
-		<div class="card-content">
-						<center><img src="\img\register.png"></center>
-						</div>
-        <div class="row">
-            @if(session()->get( 'message' ))
-					 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-                    <div class="alert">
-                        {{ session()->get( 'message' ) }}
+
+                    
+					<span class="login100-form-title p-b-43">
+						 <a href="https://nosclick.com"> <img src="img/logo10.png" style="100%" alt=""/> </a>
+					</span>
+                    
+                    @if(session()->get( 'message' ))
+                    <div class="wrap-input100">
+					 <div class="label-input100">
+                 
+                       <font color="red"><strong> {{ session()->get( 'message' ) }} </strong></font>
                     </div>
-					</div>
-            @endif
-       
-       
-            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-                <div class="card card-signup">
-
+                    </div>
+                        
+                    @endif
+                    
+                     @if ($errors->has('password'))
+                                        <div class="wrap-input100">
+                                        <div class="label-input100">
+                                        <font color="red"><strong>{{ $errors->first('password') }}</strong></font>
+                                        </div>
+                                        </div>
+                        
+                     @endif
+                    
+                    @if ($errors->has('email'))
+                                        <div class="wrap-input100">
+                                        <div class="label-input100">
+                                        <font color="red"><strong>{{ $errors->first('email') }}</strong></font>
+                                      </div>
+                                      </div>
+                        
+                    @endif
+                    
+                     @if ($errors->has('name'))
+                                        <div class="wrap-input100">
+                                        <div class="label-input100">
+                                        <font color="red"><strong>{{ $errors->first('name') }}</strong></font>
+                                      </div>
+                                      </div>
+                        
+                    @endif
+                    
+                     {{ csrf_field() }}
 					
-				
-                     <!--<div class="social-line">
-                            <a href="{{route('social.auth', ['provider'=>'facebook'])}}" class="btn btn-just-icon btn-simple"><img src="/img/facebook-connect.png"  />
-                                    <i class=""></i>
-                            </a>
-                   
-                        </div>
-                    <p class="description text-center">ou version standard</p>-->
-					 <br>
-                    <div class="row">
-                        <div class="card-content">
+                        
+                          
+					
+					<div class="wrap-input100 validate-input {{ $errors->has('name') ? ' has-error' : '' }}" data-validate="Votre nom est requis">
+				    <input id="name" type="text" class="input100" name="name" value="{{ old('name') }}" required autofocus>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Nom & Prénom</span>
+                        
+                      
+                        
+					</div>
+                    
 
-                        <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    
+                     <div class="wrap-input100 validate-input {{ $errors->has('email') ? ' has-error' : '' }}" data-validate="Votre email est requis">
+						 <input id="email" type="email" class="input100" name="email" value="{{ old('email') }}" required>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Adresse email</span>
+                        
+                      
+                        
+					</div>
+                    
+                      
+                    
+                    
+					
+					
+					<div class="wrap-input100 validate-input {{ $errors->has('password') ? ' has-error' : '' }}" data-validate="Mot de passe requis">
+						<input id="password" type="password" class="input100" name="password" required>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Mot de passe</span>
+                        
+                         
+                        
+                        
+					</div>
+                    
+                    <div class="wrap-input100 validate-input">
+						<input id="password-confirm" type="password" class="input100" name="password_confirmation" required>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Confirmation du mot de passe</span>
 
-                            {{ csrf_field() }}
+                        
+                        
+					</div>
+                    
 
-                            <div class="card-content">
-                                <div class="input-group {{ $errors->has('name') ? ' has-error' : '' }}">
-											<span class="input-group-addon">
-												<i class="material-icons">face</i>
-											</span>
-                                    <div class="form-group label-floating">
-                                        <label class="control-label" for="name">Nom complet</label><input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                    
+                    
 
-                                    @if ($errors->has('name'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                    @endif
-                                    </div>
-                                </div>
-                                
-                                <div class="input-group {{ $errors->has('email') ? ' has-error' : '' }}">
-											<span class="input-group-addon">
-												<i class="material-icons">email</i>
-											</span>
-                                    <div class="form-group label-floating">
-                                    <label class="control-label" for="email">Adresse email</label><input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="optionsCheckboxes" checked >
+							<label class="label-checkbox100" for="ckb1">
+								J'accepte les <a href="https://nosclick.com/termes-et-conditions" target=_blank>Termes et conditions</a>.
+							</label>
+						</div>
 
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
-                                    </div>
-                                </div>
+						<div>
+							<a href="{{ route('login') }}" class="txt1">
+								Déjà un compte?
+							</a>
+						</div>
+					</div>
+			         
+                    {!! Recaptcha::render() !!} <br>
 
-                                <div class="input-group {{ $errors->has('password') ? ' has-error' : '' }}">
-											<span class="input-group-addon">
-												<i class="material-icons">lock_outline</i>
-											</span>
-                                    <div class="form-group label-floating">
-                                    <label class="control-label" for="password">Mot de Passe</label><input id="password" type="password" class="form-control" name="password" required>
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">
+							S'inscrire
+						</button>
+					</div>
+                    <br><br><br>
+                    <center><a href="https://nosclick.com/luxoritalia.pdf" target=_blank class="txt1">
+                    Luxor Italia Srl - Via Giovanni Porzio 4 - Naples - Italie
+                    </a></center>
+					
+					<!--<div class="text-center p-t-46 p-b-20">
+						<span class="txt2">
+							ou avec
+						</span>
+					</div>
 
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                    </div>
-                                </div>
-                                <div class="input-group">
-											<span class="input-group-addon">
-												<i class="material-icons">lock_outline</i>
-											</span>
-                                    <div class="form-group label-floating">
-                                    <label class="control-label" for="password-confirm">Confirmer le mot de passe</label><input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                    </div>
-                                </div>
-                                
-                                
-                                @if(\Request::has('ref'))
-				 				<div class="input-group">
-											<span class="input-group-addon">
-												<i class="material-icons">trending_up</i>
-											</span>
-                                    <div class="form-group label-floating">
-                                    <label class="control-label" for="password-confirm">Link</label><input id="refer_link" type="text" class="form-control" name="refer_link" required>
-                                    </div>
-                                </div>
-								
-				@endif
-                                
-                                
-                                
+					<div class="login100-form-social flex-c-m">
+						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+							<i class="fa fa-facebook-f" aria-hidden="true"></i>
+						</a>
 
-                                <!-- If you want to add a checkbox to this form, uncomment this code -->
+						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+						</a>
+					</div>-->
+				</form>
 
-                               <div class="checkbox">
-                                <label>
-                                <input type="checkbox" name="optionsCheckboxes" checked>
-                                J'accepte les <a href="https://nosclick.com/termes-et-conditions" target=_blank>Termes et conditions</a>.
-                                </label>
-                                </div>
-                            </div>
-                            <div class="input-group col-md-4 col-md-offset-1">
+				<div class="login100-more" style="background-image: url('images/bg-01.jpg');">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 
-                              {!! Recaptcha::render() !!} 
+	
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main1.js"></script>
 
-                            </div>
-                            <div class="footer text-center">
-                                <button type="submit" class="btn btn-info">
-                                    <i class="material-icons">input</i> S'inscrire
-                                </button>
-
-                                <a class="btn btn-warning" href="{{ route('login') }}">
-                                    <i class="material-icons">warning</i> Déjà un compte?
-                                </a>
-                            </div>
-                        </form>
-                    </div>
-
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-@endsection
+</body>
+</html>

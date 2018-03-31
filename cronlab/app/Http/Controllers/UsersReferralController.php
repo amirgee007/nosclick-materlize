@@ -34,20 +34,22 @@ class UsersReferralController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-
-        $code= $user->reflink->link;
-        $link = url('register') . '?ref=' . $code;
         $sponsor = null;
-
+         $user = Auth::user();
         $referral = Referral::where('user_id','=',$user->id)->first();
 
         if(isset($referral->reflink->user)){
             $sponsor = $referral->reflink->user;
         }
+        
+
+        $code= $user->reflink->link;
+        $link = url('register') . '?ref=' . $code;		
+
         $reflink = Reflink::where('user_id',$user->id)->first();
 
         $referrals = Referral::where('reflink_id','=',$reflink->id)->get();
+
 
         return view('user.myreferral',compact('referrals','link' ,'sponsor'));
     }

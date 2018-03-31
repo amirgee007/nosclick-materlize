@@ -45,9 +45,9 @@ class AccountActiveSuccess extends Notification
 
         return (new MailMessage)
 
-            ->subject('Votre compte a été activé avec succès')
+            ->subject('Votre compte a été activé')
             ->greeting('Félicitations '. $user->name.'!')
-            ->line("Votre compte a été vérifiée avec succès. ")
+            ->line("Votre compte a été vérifié avec succès. ")
             ->line("Une autre vérification est cependant nécessaire, afin que votre compte soit entièrement activé. La vérification de votre identité. ")
             ->action('Connectez-vous', route('login'))
             ->line('Merci d\'utiliser nos services! Si vous rencontrez un problème, n\'hésitez pas à nous contacter à tout moment.');

@@ -7894,6 +7894,46 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   border-radius: 3px;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 255, 255, 0.4);
 }
+.alert-stripe, .alert.alert-stripe {
+  background-image:url(/img/stripe21.png);
+  width: auto;
+  height: 250px;
+  color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 255, 255, 0.4);
+}
+.alert-payeer, .alert.alert-payeer {
+  background-image:url(/img/payeer21.png);
+  width: auto;
+  height: 250px;
+  color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 255, 255, 0.4);
+}
+.alert-payza, .alert.alert-payza {
+  background-image:url(/img/payza21.png);
+  width: auto;
+  height: 250px;
+  color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 255, 255, 0.4);
+}
+.alert-perfectmoney, .alert.alert-perfectmoney {
+  background-image:url(/img/perfectmoney21.png);
+  width: auto;
+  height: 250px;
+  color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 255, 255, 0.4);
+}
+.alert-neteller, .alert.alert-neteller {
+  background-image:url(/img/neteller21.png);
+  width: auto;
+  height: 250px;
+  color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 255, 255, 0.4);
+}
 .alert a, .alert .alert-link, .alert.alert-default a, .alert.alert-default .alert-link {
   color: #555555;
 }
@@ -7929,6 +7969,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   color: #777;
   border-radius: 15px;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(91,80,235, 0.4);
+}
 }
 .alert.alert-info a, .alert.alert-info .alert-link {
   color: #ffffff;

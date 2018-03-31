@@ -27,7 +27,7 @@
 
                 <div class="footer">
                     <h4 class="card-title">{{$testimonial->user->name}}</h4>
-                    <h6 class="category">{{$testimonial->user->membership->name}} User</h6>
+                    <h6 class="category">Utilisateur {{$testimonial->user->membership->name}}</h6>
                     <div class="card-avatar">
                         <a href="#">
                             <img class="img" src="{{$testimonial->user->profile->avatar}}" />

@@ -195,7 +195,7 @@
     <br><br><br>
     <div class="row">
         @foreach($posts as $post)
-        <div class="col-md-4">
+        <div class="col-md-4 col-md-pull-0">
             <div class="card card-product">
                 <div class="card-image" data-header-animation="false">
                     <a href="">

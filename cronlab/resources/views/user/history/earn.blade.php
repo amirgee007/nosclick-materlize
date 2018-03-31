@@ -51,7 +51,7 @@
                         <h1 class="text-center">Aucun historique de gains</h1>
                     @endif
                     <div class="row">
-                        <div class="col-sm-6 col-sm-offset-5">
+                        <div class="col-sm-7 col-sm-offset-3">
 
                             {{$earns->render()}}
 

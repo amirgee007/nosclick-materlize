@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <nav class="pull-left">
-        <ul>
+       <h6> <ul>
             <li>
                 <a href="{{route('contact')}}">
                     Contact
@@ -41,9 +41,9 @@
                     </a>
                 </li>
             @endif
-        </ul>
+           </ul></h6>
     </nav>
-    <div class="copyright pull-right"> <a href="https://www.google.fr/chrome/?brand=CHBD&gclid=EAIaIQobChMI2I-04b3C2QIVTrHtCh1wGgCXEAAYASAAEgKY3PD_BwE" target="_blank">Navigateur recommandé &nbsp;<img src="/img/google.png" alt="google"/></a> &nbsp; &nbsp; &nbsp; &nbsp; 
+    <div class="copyright pull-right"> <a href="https://www.google.fr/chrome/?brand=CHBD&gclid=EAIaIQobChMI2I-04b3C2QIVTrHtCh1wGgCXEAAYASAAEgKY3PD_BwE" target="_blank">recommandé &nbsp;<img src="/img/google.png" alt="google"/></a> &nbsp; &nbsp; &nbsp; &nbsp; 
         &copy; {{$settings->site_name}} {{ date('Y') }}
-    </div>
+    </div> 
 </div>

@@ -92,7 +92,7 @@ class RegisterController extends Controller
         Profile::create([
 
             'user_id'=>$user->id,
-            'avatar'=>'uploads/avatars/default.jpg',
+            'avatar'=>'uploads/avatars/default.jpg', 
         ]);
 
 
@@ -133,7 +133,7 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
         
-        return redirect()->route( 'login' )->with( [ 'message' => 'Votre compte a été créer avec succès. Vous avez reçu un email contenant le lien d\'activation.' ] );
+        return redirect()->route( 'login' )->with( [ 'message' => 'Vous avez reçu un email contenant le lien d\'activation.' ] );
 
     }
 }

@@ -11,8 +11,40 @@
 				  <br>
                   <h4 class="card-title">News & Update</h4>
 
-                 				 <div class="col-md-12">
+
+
+                                   				 <div class="col-md-12">
 				 <div class="pull-right"> Rejoignez notre groupe officiel <a href="https://www.facebook.com/groups/2001188593428270/?hc_ref=ARQ6lAFpiz7wSEPDxPt_WXpSdAL2Qz9fCVRuGr0sDdrVjd1lDaGWi2GsK0fSScTXWE0" target="_blank">&nbsp;<br><img src="/img/face1.png" style="width:80%" alt="google"/></a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div><br><br>
+           <div class="card-content">
+               <div class="alert alert-info alert-with-icon" data-notify="container">
+                   <i class="material-icons" data-notify="icon">notifications</i>
+                   <span data-notify="message">  <br>
+
+                                Bonjour {{Auth::user()->name}} , <br><br>
+
+							     Suite à plusieurs mises à jour,  nous souhaitons présenter nos excuses aux membres qui ont eu des problèmes de connexion,  ou tout autre erreur technique ou administrative qui a pu apparaître.
+                                <br><br>
+                                Aujourd'hui notre système est totalement sécurisé, et notre équipe technique à effectuer des améliorations ainsi que des corrections importantes.  Nous avons eu report de beaucoup d'entre-vous qu'il n'est possible de vous inscrire directement via les liens que vos amis vous ont fournis,  il était demandé à l'inscription une indication « link », ce bug est corrigé et vous pouvez-vous fournir sans problème vos liens à vos amis, connaissances et proches.
+                                 <br><br>
+                                Suite à une autre requête de plusieurs membres,  il est désormais possible également de voir qui est son « parrain », ceci directement dans la page « Parrainage »,  si vous avez un parrain il apparaîtra au-dessus de votre lien,  si rien n'apparaît au-dessus de votre lien,  cela veut dire que vous vous êtes inscrit directement sur notre site, sans aucun parrainage.
+                                 <br><br>
+                                Notre équipe technique développe en ce moment plusieurs nouveaux outils,  afin de fournir un meilleur confort et sécurité à nos clients durant l'utilisation de nos produits, dont une application mobile  iOS et Android.
+                                 <br><br>
+                                Notre direction a fourni une nouvelle tâche également à ntore département technique,  qui sera d'avoir un webshop sur notre site internet,  contenant des produits de nos partenaires et autres,  qui pourront être acquis avec des points que nos membres vont pouvoir cumuler en utilisant nos produits.
+
+                                 <br><br>
+
+								28 mars 2018
+
+                    <br>
+
+
+                   </span>
+               </div>
+           </div>
+       </div>
+
+                 				 <div class="col-md-12">
            <div class="card-content">
                <div class="alert alert-info alert-with-icon" data-notify="container">
                    <i class="material-icons" data-notify="icon">notifications</i>

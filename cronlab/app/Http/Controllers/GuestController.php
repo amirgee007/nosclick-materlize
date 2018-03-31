@@ -127,7 +127,7 @@ class GuestController extends Controller
 
 
         });
-        session()->flash('message', 'Vous êtes connecté à nosclick');
+        session()->flash('message', 'Vous êtes connecté');
         Session::flash('type', 'success');
         Session::flash('title', 'Connexion avec succès');
         return redirect()->route('userDashboard');

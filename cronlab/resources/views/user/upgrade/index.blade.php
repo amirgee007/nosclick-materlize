@@ -65,7 +65,7 @@
 
                                         @else
                                             <a href="{{route('userMembership.upgrade', $membership->id)}}" type="button" rel="tooltip" class="btn btn-primary">
-                                                Mis à jour
+                                                Souscrire
                                             </a>
 
                                         @endif

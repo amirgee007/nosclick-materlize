@@ -37,8 +37,9 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
 	            <center> 
 	            <!--<span class="control-label">  Vérification d'identité </span></center>-->
 	            
-                        @if(@$result1)
-                            @if($result1->status == false)
+	            
+                        @if($result1 && $result2)
+                            @if($result1->status == false && $result2->status == false)
                            <center> <span class="btn btn-warning btn-sm">En cours de vérification</span></center>
                             @else
                             <center><span class="btn btn-success btn-sm">Vérifié</span></center>

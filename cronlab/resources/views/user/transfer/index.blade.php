@@ -65,6 +65,7 @@
                             <div class="row">
                                 <div class="col-md-5 col-md-offset-2">
                                     <div class="form-group label-floating">
+                                     <p>de</p>
                                         <select class="selectpicker" name="account" data-style="btn btn-info btn-round" title="Select Status" data-size="7">
                                             <option value="1" > Compte dépôt</option>
                                             <option value="2" > Compte principal</option>
@@ -75,15 +76,19 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-5 col-md-offset-2">
-                                    <div class="form-group label-floating">
-                                        <label  class="control-label" for="amount">Montant du transfert</label>
-                                        <input id="amount" name="amount" type="text" class="form-control">
+
+                                        
+                                        <div class="wrap-input100 validate-input">
+                                                    <input id="amount" name="amount" type="number" class="input100">
+                                            <span class="focus-input100"></span>
+                                            <span class="label-input100">Montant en EURO</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5 col-md-offset-2">
                                     <div class="form-group label-floating">
+                                            <p>vers</p>
                                         <select class="selectpicker" name="transfer" data-style="btn btn-info btn-round" title="Select Status" data-size="7">
                                             <option value="1" selected >Compte dépôt</option>
                                             <option value="2" >Compte principal</option>
@@ -138,17 +143,27 @@
 
                             <div class="row">
                                 <div class="col-md-5 col-md-offset-2">
-                                    <div class="form-group label-floating">
-                                        <label  class="control-label" for="email">E-mail du membre</label>
-                                        <input id="email" name="email" type="email" class="form-control">
+
+                                        
+                                        <div class="wrap-input100 validate-input">
+                                         <input id="email" name="email" type="email" class="input100">
+                                            <span class="focus-input100"></span>
+                                            <span class="label-input100">E-mail du destinataire</span>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5 col-md-offset-2">
-                                    <div class="form-group label-floating">
-                                        <label  class="control-label" for="amount">Montant du tranfert</label>
-                                        <input id="amount" name="amount" type="number" class="form-control">
+                                    
+                                
+                                        
+                                        <div class="wrap-input100 validate-input">
+                                         <input id="amount" name="amount" type="number" class="input100">
+                                            <span class="focus-input100"></span>
+                                            <span class="label-input100">Montant en EURO</span>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -78,10 +78,12 @@
                                         <div class="row">
 
                                             <div class="col-md-6 col-md-offset-1">
-                                                <div class="form-group label-floating">
 
-                                                    <label  class="control-label" for="account">Votre compte</label>
-                                                    <input id="account" name="account" type="text" class="form-control">
+
+                                                    <div class="wrap-input100 validate-input">
+                                                    <input id="account" name="account" type="email" class="input100" required autofocus>
+                                                        <span class="focus-input100"></span>
+                                                        <span class="label-input100">Votre compte</span>
 
                                                 </div>
                                             </div>
@@ -93,11 +95,12 @@
                                         <div class="row">
 
                                             <div class="col-md-6 col-md-offset-1">
-
-                                                <div class="form-group label-floating">
-
-                                                    <label  class="control-label" for="amount">Montant du retrait</label>
-                                                    <input id="amount" name="amount" type="text" class="form-control">
+                                          
+                                                    
+                                                    <div class="wrap-input100 validate-input">
+                                                    <input id="amount" name="amount" type="number" class="input100">
+                                                        <span class="focus-input100"></span>
+                                                        <span class="label-input100">Montant en EURO</span>
 
                                                 </div>
                                             </div>
@@ -129,12 +132,10 @@
         
 
             <div class="col-md-3">
-                <div class="card card-content">
+                <div class="card-content">
                     <div class="card-content">
-                     
-
-                        <div class="card card-stats">
-                            <div class="card-header" ><img src="/img/solde.png" style="width:80%"/>
+                        <div class="card ">
+                        <div class="card-header" ><img src="/img/solde.png" style="width:80%"/>
                                
                             </div>
                             <div class="card-content">
@@ -157,3 +158,4 @@
     </div>
 
 @endsection
+

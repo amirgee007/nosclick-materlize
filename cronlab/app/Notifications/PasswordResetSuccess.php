@@ -47,8 +47,8 @@ class PasswordResetSuccess extends Notification
         return (new MailMessage)
             ->subject('Réinitialisation du mot de passe')
             ->greeting('Salut '. $user->name.'!')
-            ->line("Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe. S'il vous plaît gardez-le en lieu sûr.")
-            ->line("Vous n'avez pas demander de réinitialisation de mot de passe? Oups... Peut-être que vos informations d'identification ne sont pas sécurisées. Changez immédiatement votre mot de passe avant que quelqu'un ne change votre email.")
+            ->line("Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.")
+            ->line("Vous n'avez pas demander de réinitialisation de mot de passe? Oups... Peut-être que vos informations d'identification ne sont pas sécurisées. ")
             ->action('Connectez-vous', route('login'))
             ->line('Merci d\'utiliser nos services! Si vous rencontrez un problème, n\'hésitez pas à nous contacter à tout moment.');
     }

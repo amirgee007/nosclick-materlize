@@ -1,92 +1,166 @@
+<html lang="en">
+<head>
 
-@extends('layouts.app')
-@section('title', 'Connexion au panneau de controle')
-@section('content')
-    <div class="container">
-        
-        
-	<div class="card-content">
-		<center><img src="\img\login.png"></center>
-		</div>
-		
-		@if(session()->get( 'message' ))
-					 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-                    <div class="alert">
-                        {{ session()->get( 'message' ) }}
+	<title>nosclick - Connexion</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="img/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main1.css">
+<!--===============================================================================================-->
+</head>
+<body style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+
+
+					<span class="login100-form-title p-b-43">
+						 <a href="https://nosclick.com"> <img src="img/logo10.png" style="100%" alt=""/> </a>
+					</span>
+                    
+                    
+                                   @if(session()->get( 'message' ))
+                    <div class="wrap-input100">
+					 <div class="label-input100">
+
+                      <font color="red"><strong>{{ session()->get( 'message' ) }}</strong></font>
                     </div>
-					</div>
-				
+                        </div>
+                     
 					
-       @endif
-		
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-                <div class="card card-signup">
+                    @endif
                     
+                     {{ csrf_field() }}
+					
+					
                     
-					<form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+                     @if ($errors->has('email'))
+                                         <div class="wrap-input100">
+					                     <div class="label-input100">
+                                          <font color="red"><strong>{{ $errors->first('email') }}</strong></font>
+                                             </div>
+                                                </div>
 
-                         <!--<div class="social-line">
-                                <a href="{{route('social.auth', ['provider'=>'facebook'])}}" class="btn btn-just-icon btn-simple"><img src="/img/facebook-connect.png"  />
-                                    <i class=""></i>
-                                </a>
-
-                            </div>
-                        <p class="description text-center">ou version standard</p>-->
-
-                        <br>
-                        <div class="card-content">
-                            <div class="input-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">email</i>
-                                </span>
-                                <div class="form-group label-floating">
-                                    <label class="control-label" for="email">Adresse e-mail</label>
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
                                     @endif
-                                   
-                                </div>
-                            </div>
-                            <div class="input-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">lock_outline</i>
-                                </span>
-                                <div class="form-group label-floating">
-                                    <label class="control-label" for="password">Mot de passe</label>
-                                    <input id="password" type="password" class="form-control" name="password" required>
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
+                    
+					<div class="wrap-input100 validate-input {{ $errors->has('email') ? ' has-error' : '' }}" data-validate="Un email valide est requis: ex@abc.xyz">
+						<input id="email" class="input100" type="email" name="email" value="{{ old('email') }}" required autofocus>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Email</span>
+                        
+                        
+                        
+					</div>
+					
+					  @if ($errors->has('password'))
+                                         <div class="wrap-input100">
+                                           <div class="label-input100"> 
+					                      
+                                            <font color="red"><strong>{{ $errors->first('password') }}</strong></font>
+                                    </div>
+                                        </div>
+                             
                                     @endif
-                                </div>
-                            </div>
+                    
+					<div class="wrap-input100 validate-input {{ $errors->has('password') ? ' has-error' : '' }}" data-validate="Mot de passe requis">
+                        
+						<input id="password" class="input100" type="password" name="password" required>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Mot de passe</span>
+                        
+                       
+                        
+                        
+					</div>
 
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+							<label class="label-checkbox100" for="ckb1">
+								Se souvenir de moi
+							</label>
+						</div>
 
+						<div>
+							<a href="{{ route('password.request') }}" class="txt1">
+                                
+								Mot de passe oublié?
+							</a>
+						</div>
+					</div>
+			
 
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Se souvenir de moi
-                                </label>
-                            </div>
-                        </div>
-                        <div class="footer text-center">
-                            <button type="submit" class="btn btn-info">S'identifier</button>
-                            <a class="btn btn-success" href="{{ route('password.request') }}">
-                                Mot de passe oublié?
-                            </a>
-                        </div>
-                    </form>
-					<br>
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">
+							S'identifier
+						</button>
+					</div>
+					<br><br><br>
+                   <center> <a href="https://nosclick.com/luxoritalia.pdf" target=_blank class="txt1">
+                    Luxor Italia Srl - Via Giovanni Porzio 4 - Naples - Italie
+                    </a></center> 
+					<!--<div class="text-center p-t-46 p-b-20">
+						<span class="txt2">
+							ou avec
+						</span>
+					</div>
 
-                </div>
-            </div>
+					<div class="login100-form-social flex-c-m">
+						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+							<i class="fa fa-facebook-f" aria-hidden="true"></i>
+						</a>
 
-@endsection
+						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+						</a>
+					</div>-->
+				</form>
+
+				<div class="login100-more" style="background-image: url('images/bg-01.jpg');">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main1.js"></script>
 

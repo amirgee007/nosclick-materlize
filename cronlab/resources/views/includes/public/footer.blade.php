@@ -54,10 +54,13 @@
         </ul>
     </nav><br>
     <div class="copyright pull-right"> 
-        &copy; {{config('app.name')}}  {{ date('Y') }}</a>
+        &copy; {{config('app.name')}}  {{ date('Y') }}&nbsp; &nbsp; &nbsp;</a>
     </div>
+    <div class="copyright pull-center"> <a href="https://nosclick.com/luxoritalia.pdf" target=_blank class="txt1">
+                   Luxor Italia Srl - Via Giovanni Porzio 4 - Naples - Italie 
+    </a></div>
 	<div class="copyright pull-left">
-	<a href="https://www.google.fr/chrome/?brand=CHBD&gclid=EAIaIQobChMI2I-04b3C2QIVTrHtCh1wGgCXEAAYASAAEgKY3PD_BwE" target="_blank">Navigateur recommandé &nbsp;<img src="/img/google.png" alt="google"/></a>
+	<a href="https://www.google.fr/chrome/?brand=CHBD&gclid=EAIaIQobChMI2I-04b3C2QIVTrHtCh1wGgCXEAAYASAAEgKY3PD_BwE" target="_blank"> recommandé &nbsp;<img src="/img/google.png" alt="google"/></a>
 	</div>
 </div>
 
