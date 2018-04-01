@@ -23,7 +23,28 @@ use Illuminate\Http\Request;
 
 class GuestController extends Controller
 {
-    //
+
+
+    public function test(){
+
+        $users = User::all();
+        foreach ( $users as $user){
+
+
+            $name = $user->name;
+            $splitName = explode(' ', $name, 2); // Restricts it to only 2 values, for names like Billy Bob Jones
+
+            $data['first_name']= $splitName[0];
+            $data['last_name']= !empty($splitName[1]) ? $splitName[1] : ''; // If last name doesn't exist, make it empty
+
+            $user->update($data);
+
+            echo $name;
+            echo '-';
+        }
+
+        dd('done');
+    }
 
     public function index()
     {
