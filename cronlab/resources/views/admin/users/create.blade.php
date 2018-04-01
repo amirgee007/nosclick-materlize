@@ -33,21 +33,19 @@
 
 
                         <div class="row">
-
-                            <div class="col-md-6">
-
-                                <div class="form-group label-floating">
-                                    <label  class="control-label" for="name">Nom complet</label>
-                                    <input id="name" name="name" type="text" class="form-control">
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
-                                    <label  class="control-label" for="email">Adresse email</label>
-                                    <input id="email" name="email" type="text" class="form-control">
+                                    <label  class="control-label" for="first_name">Nom</label>
+                                    <input id="first_name" name="first_name" type="text" class="form-control">
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group label-floating">
+                                    <label  class="control-label" for="last_name">last Name</label>
+                                    <input id="last_name" name="last_name" type="text" class="form-control">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
