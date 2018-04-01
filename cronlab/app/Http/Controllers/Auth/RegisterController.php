@@ -91,7 +91,8 @@ class RegisterController extends Controller
             'token'=>str_random(25),
 
         ]);
-dd($user);
+
+
         Profile::create([
 
             'user_id'=>$user->id,
