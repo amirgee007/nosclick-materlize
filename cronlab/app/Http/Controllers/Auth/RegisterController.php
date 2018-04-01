@@ -56,7 +56,8 @@ class RegisterController extends Controller
     {
         
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
 
@@ -76,7 +77,9 @@ class RegisterController extends Controller
 
        $user = User::create([
 
-            'name' => $data['name'],
+            'name' => $data['first_name'].' '.$data['last_name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'admin'=>0,
@@ -88,7 +91,7 @@ class RegisterController extends Controller
             'token'=>str_random(25),
 
         ]);
-
+dd($user);
         Profile::create([
 
             'user_id'=>$user->id,

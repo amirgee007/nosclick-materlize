@@ -34,8 +34,6 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
 
-
-                    
 					<span class="login100-form-title p-b-43">
 						 <a href="https://nosclick.com"> <img src="img/logo10.png" style="100%" alt=""/> </a>
 					</span>
@@ -43,92 +41,54 @@
                     @if(session()->get( 'message' ))
                     <div class="wrap-input100">
 					 <div class="label-input100">
-                 
                        <font color="red"><strong> {{ session()->get( 'message' ) }} </strong></font>
                     </div>
                     </div>
-                        
                     @endif
-                    
-                     @if ($errors->has('password'))
-                                        <div class="wrap-input100">
-                                        <div class="label-input100">
-                                        <font color="red"><strong>{{ $errors->first('password') }}</strong></font>
-                                        </div>
-                                        </div>
-                        
-                     @endif
-                    
-                    @if ($errors->has('email'))
-                                        <div class="wrap-input100">
-                                        <div class="label-input100">
-                                        <font color="red"><strong>{{ $errors->first('email') }}</strong></font>
-                                      </div>
-                                      </div>
-                        
-                    @endif
-                    
-                     @if ($errors->has('name'))
-                                        <div class="wrap-input100">
-                                        <div class="label-input100">
-                                        <font color="red"><strong>{{ $errors->first('name') }}</strong></font>
-                                      </div>
-                                      </div>
-                        
-                    @endif
-                    
+
+					@if($errors->any())
+						@foreach ($errors->all() as $error)
+							<div class="wrap-input100">
+								<div class="label-input100">
+									<font color="red"><strong>{{ $error }}</strong></font>
+								</div>
+							</div>
+						@endforeach
+					@endif
+
                      {{ csrf_field() }}
-					
-                        
-                          
-					
-					<div class="wrap-input100 validate-input {{ $errors->has('name') ? ' has-error' : '' }}" data-validate="Votre nom est requis">
-				    <input id="name" type="text" class="input100" name="name" value="{{ old('name') }}" required autofocus>
+
+					<div class="wrap-input100 validate-input {{ $errors->has('first_name') ? ' has-error' : '' }}" data-validate="Votre nom est requis">
+				    <input id="first_name" type="text" class="input100" name="first_name" value="{{ old('first_name') }}" required autofocus>
 						<span class="focus-input100"></span>
-						<span class="label-input100">Nom & Prénom</span>
-                        
-                      
-                        
+						<span class="label-input100">Nom </span>
+					</div>
+
+					<div class="wrap-input100 validate-input {{ $errors->has('last_name') ? ' has-error' : '' }}" data-validate="Votre nom est requis">
+						<input id="last_name" type="text" class="input100" name="last_name" value="{{ old('last_name') }}" required>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Prénom</span>
 					</div>
                     
 
-                    
                      <div class="wrap-input100 validate-input {{ $errors->has('email') ? ' has-error' : '' }}" data-validate="Votre email est requis">
 						 <input id="email" type="email" class="input100" name="email" value="{{ old('email') }}" required>
 						<span class="focus-input100"></span>
 						<span class="label-input100">Adresse email</span>
-                        
-                      
-                        
 					</div>
                     
-                      
-                    
-                    
-					
-					
+
 					<div class="wrap-input100 validate-input {{ $errors->has('password') ? ' has-error' : '' }}" data-validate="Mot de passe requis">
 						<input id="password" type="password" class="input100" name="password" required>
 						<span class="focus-input100"></span>
 						<span class="label-input100">Mot de passe</span>
-                        
-                         
-                        
-                        
 					</div>
                     
                     <div class="wrap-input100 validate-input">
 						<input id="password-confirm" type="password" class="input100" name="password_confirmation" required>
 						<span class="focus-input100"></span>
 						<span class="label-input100">Confirmation du mot de passe</span>
-
-                        
-                        
 					</div>
-                    
-
-                    
-                    
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
@@ -180,10 +140,7 @@
 		</div>
 	</div>
 	
-	
 
-	
-	
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
