@@ -98,11 +98,11 @@ class RegisterController extends Controller
         Profile::create([
 
             'user_id'=>$user->id,
-            'address'=>$user->address,
-            'city'=>$user->city,
-            'country'=>$user->country,
-            'post_code'=>$user->post_code,
-            'state'=>$user->state,
+            'address'=>$data['address'],
+            'city'=> $data['city'],
+            'country'=> $data['country'],
+            'post_code'=> $data['post_code'],
+            'state'=>$data['state'],
             'avatar'=>'uploads/avatars/default.jpg',
         ]);
 
