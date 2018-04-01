@@ -214,6 +214,44 @@ class UserDepositsController extends Controller
     }
 
 
+    public static function payeerConfirm($data ,$user)
+    {
+
+        $gateway = Gateway::find(5);
+
+        $percentage = $gateway->percent;
+        $fixed = $gateway->fixed;
+
+        $charge = (($percentage / 100) * $data['m_amount']) + $fixed;
+
+        $new_amount = $data['m_amount'] - $charge;
+       $already_done =  Deposit::where('transaction_id' ,$data['m_operation_id'])->first();
+
+        if($already_done){
+            return 0;
+        }
+
+
+        $deposit = Deposit::create([
+            'transaction_id' => $data['m_operation_id'],
+            'user_id' => $user->id,
+            'gateway_name' => $gateway->name,
+            'amount' => $data['m_amount'],
+            'charge' => $charge,
+            'net_amount' => $new_amount,
+            'status' => 1,
+            'details' => 'Dépôt avec Payeer',
+        ]);
+
+
+        $user->profile->deposit_balance = $user->profile->deposit_balance + $new_amount;
+        $user->profile->save();
+
+        return $new_amount;
+
+    }
+
+
     public function stripeConfirm(Request $request)
     {
         $gateway = Gateway::find(2);
