@@ -52,28 +52,33 @@
                         </div>
 
                         <div class="row">
-
                             <div class="col-md-6">
-
                                 <div class="form-group label-floating">
-
-                                    <label  class="control-label" for="name">Nom complet</label>
-                                    <input id="name" name="name" type="text" value="{{$user->name}}" class="form-control">
-
+                                    <label  class="control-label" for="first_name">Nom</label>
+                                    <input id="first_name" name="first_name" type="text" value="{{$user->first_name}}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <div class="form-group label-floating">
+                                    <label  class="control-label" for="last_name">Prénom</label>
+                                    <input id="last_name" name="last_name" value="{{$user->last_name}}" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group label-floating">
                                     <label  class="control-label" for="email">Adresse email</label>
                                     <input id="email" name="email" value="{{$user->email}}" type="text" class="form-control" readonly>
                                 </div>
                             </div>
-
                         </div>
+
+
                         <div class="row">
 
                             <div class="col-md-6">
-
                                 <div class="form-group label-floating">
                                     <label  class="control-label" for="occupation">Fonction</label>
                                     <input id="occupation" name="occupation" type="text" value="{{$user->profile->occupation}}" class="form-control">

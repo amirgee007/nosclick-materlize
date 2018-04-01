@@ -55,7 +55,8 @@ class UserProfileController extends Controller
 
         $this->validate($request, [
 
-            'name'=> 'required',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email',
             'occupation' => 'required|max:30',
             'mobile' => 'required|min:8|max:16',
@@ -86,7 +87,8 @@ class UserProfileController extends Controller
 
         }
 
-        $user->name = $request->name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->profile->occupation = $request->occupation;
         $user->profile->mobile = $request->mobile;
