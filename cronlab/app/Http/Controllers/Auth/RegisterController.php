@@ -58,6 +58,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
 
@@ -96,7 +98,12 @@ class RegisterController extends Controller
         Profile::create([
 
             'user_id'=>$user->id,
-            'avatar'=>'uploads/avatars/default.jpg', 
+            'address'=>$user->address,
+            'city'=>$user->city,
+            'country'=>$user->country,
+            'post_code'=>$user->post_code,
+            'state'=>$user->state,
+            'avatar'=>'uploads/avatars/default.jpg',
         ]);
 
 
@@ -123,16 +130,23 @@ class RegisterController extends Controller
     
     public function register(Request $request)
     {
-        
+
         $invalid_mail_servers = 'yopmail.com vmani.com mozej.com nwytg.com jetable.org mail-temporaire.fr emailure.net ';
-        
+        $invalid_countries= 'pakistan';
+
         $mail = $request->email;
         
         list($user, $domain) = explode('@', $mail);
-        $yes = strpos($invalid_mail_servers, $domain) !== false;
-        if($yes)
-        return back()->with( [ 'message' => 'Interdit d\'ouvrir un compte avec '.$domain ] )->withInput(Input::all());
-        
+        $mail_not_ok = strpos($invalid_mail_servers, $domain) !== false;
+        $country_not_ok = strpos($invalid_countries, strtolower($request->country)) !== false;
+
+        if($mail_not_ok)
+            return back()->with( [ 'message' => 'Interdit d\'ouvrir un compte avec '.$domain ] )->withInput(Input::all());
+
+        if($country_not_ok)
+            return back()->with( [ 'message' => 'Unauthorized country '.$request->country ] )->withInput(Input::all());
+
+
         $this->validator($request->all())->validate();
 
         $user = $this->create($request->all());
