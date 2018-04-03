@@ -48,7 +48,7 @@ class UsersReferralController extends Controller
 
         $reflink = Reflink::where('user_id',$user->id)->first();
 
-        $referrals = Referral::where('reflink_id','=',$reflink->id)->get();
+        $referrals = Referral::where('reflink_id','=',$reflink->id)->paginate(10);
 
 
         return view('user.myreferral',compact('referrals','link' ,'sponsor'));

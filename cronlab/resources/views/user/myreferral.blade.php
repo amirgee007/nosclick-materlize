@@ -127,7 +127,16 @@ function myFunction() {
             </div>
                 </div>
             </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-sm-offset-4">
+                {{$referrals->render()}}
+            </div>
+        </div>
+
             </div>
 		</div>
+
+
 
 @endsection
