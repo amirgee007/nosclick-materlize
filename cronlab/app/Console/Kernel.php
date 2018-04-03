@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
         //
 
         '\App\Console\Commands\GiveInvestInterestToUsers',
-     //   '\App\Console\Commands\ResetAppData',
+        '\App\Console\Commands\AutoPpcLinksResetCommand',
     ];
 
     /**
@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+         $schedule->command('AutoPpcLinksResetCommand')
+                  ->dailyAt('00:00');
 
         $schedule->command('GiveInvestInterestToUsers:cronlabinterest')->everyMinute();
      //   $schedule->command('ResetAppData:resetcronlab')->everyThirtyMinutes();

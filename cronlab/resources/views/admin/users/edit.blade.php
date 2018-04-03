@@ -103,7 +103,7 @@
                             <div class="col-md-4">
                                 <div class="form-group label-floating">
                                     <label  class="control-label" for="deposit_balance">Compte dépôt</label>
-                                    <input id="deposit_balance" name="deposit_balance" value="{{$user->profile->deposit_balance}}"  type="number" class="form-control">
+                                    <input id="deposit_balance" name="deposit_balance" value="{{$user->profile->deposit_balance}}" step="0.0001" type="number" class="form-control">
 
                                 </div>
                             </div>
