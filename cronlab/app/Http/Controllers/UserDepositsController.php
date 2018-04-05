@@ -254,44 +254,52 @@ class UserDepositsController extends Controller
 
     public function stripeConfirm(Request $request)
     {
-        $gateway = Gateway::find(2);
 
-        Stripe::setApiKey($gateway->val2);
-        $charge = Charge::create(array(
-            "amount" => $request->amount * 100,
-            "currency" => 'EUR',
-            "description" => "Dépôt par carte TrX ID: ".$request->code."",
-            "source" => $request->stripeToken,
-        ));
+        try {
+            $gateway = Gateway::find(2);
 
-        $user = User::find($request->user_id);
+            Stripe::setApiKey($gateway->val2);
+            $charge = Charge::create(array(
+                "amount" => $request->amount * 100,
+                "currency" => 'EUR',
+                "description" => "Dépôt par carte TrX ID: ".$request->code."",
+                "source" => $request->stripeToken,
+            ));
 
-        $percentage = $gateway->percent;
-        $fixed = $gateway->fixed;
+            $user = User::find($request->user_id);
 
-        $charge = (($percentage / 100) * $request->amount) + $fixed;
+            $percentage = $gateway->percent;
+            $fixed = $gateway->fixed;
 
-        $new_amount = $request->amount - $charge;
+            $charge = (($percentage / 100) * $request->amount) + $fixed;
 
-        $deposit = Deposit::create([
+            $new_amount = $request->amount - $charge;
 
-            'transaction_id' => str_random(6) . $user->id . str_random(6),
-            'user_id' => $user->id,
-            'gateway_name' => $gateway->name,
-            'amount' => $request->amount,
-            'charge' => $charge,
-            'net_amount' => $new_amount,
-            'status' => 1,
-            'details' => 'Dépôt avec Stripe',
+            $deposit = Deposit::create([
 
-        ]);
+                'transaction_id' => str_random(6) . $user->id . str_random(6),
+                'user_id' => $user->id,
+                'gateway_name' => $gateway->name,
+                'amount' => $request->amount,
+                'charge' => $charge,
+                'net_amount' => $new_amount,
+                'status' => 1,
+                'details' => 'Dépôt avec Stripe',
 
-        $user->profile->deposit_balance = $user->profile->deposit_balance + $new_amount;
-        $user->profile->save();
+            ]);
 
-        session()->flash('message', 'Après déduction des frais de transaction, le montant total de dépôt de € ' . $new_amount . ' a été transférer avec succès. Les fonds sont automatiquement créditer à votre solde. Arpès une vérification de sécurité');
-        Session::flash('type', 'success');
-        Session::flash('title', 'Votre dépôt');
+            $user->profile->deposit_balance = $user->profile->deposit_balance + $new_amount;
+            $user->profile->save();
+
+            session()->flash('message', 'Après déduction des frais de transaction, le montant total de dépôt de € ' . $new_amount . ' a été transférer avec succès. Les fonds sont automatiquement créditer à votre solde. Arpès une vérification de sécurité');
+            Session::flash('type', 'success');
+            Session::flash('title', 'Votre dépôt');
+        }
+        catch (\Exception $e) {
+            session()->flash('message', $e->getMessage());
+            Session::flash('type', 'error');
+            Session::flash('title', 'Votre dépôt');
+        }
 
         return redirect(route('userDashboard'));
 

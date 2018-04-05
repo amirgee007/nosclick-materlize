@@ -36,6 +36,6 @@
         jQuery(function(){
             $('#pay_card_button').click();
         });
-    </script
+    </script>
 
 @endsection
