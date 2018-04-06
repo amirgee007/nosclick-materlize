@@ -35,7 +35,7 @@ class UsersReferralController extends Controller
     public function index()
     {
         $sponsor = null;
-         $user = Auth::user();
+        $user = Auth::user();
         $referral = Referral::where('user_id','=',$user->id)->first();
 
         if(isset($referral->reflink->user)){

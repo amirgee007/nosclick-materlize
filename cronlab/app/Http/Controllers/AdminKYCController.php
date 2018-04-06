@@ -8,7 +8,12 @@ use App\Notifications\KYC2VerifyReject;
 use App\Notifications\KYC2VerifySuccess;
 use App\Notifications\KYCVerifyReject;
 use App\Notifications\KYCVerifySuccess;
+use App\Referral;
+use App\Reflink;
+use App\Settings;
+use App\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AdminKYCController extends Controller
@@ -74,11 +79,28 @@ class AdminKYCController extends Controller
      */
     public function show($id)
     {
-        //
+        /////////////////referals
+        $sponsor = null;
+        $user = Auth::user();
+        $referral = Referral::where('user_id','=',$user->id)->first();
+
+        if(isset($referral->reflink->user)){
+            $sponsor = $referral->reflink->user;
+        }
+
+        $reflink = Reflink::where('user_id',$user->id)->first();
+
+        $referrals = Referral::where('reflink_id','=',$reflink->id)->paginate(10);
+
+        /////////////withdraws
+
+        $withdraws= Withdraw::whereUser_id($user->id)->orderBy('created_at','desc')->paginate(15);
+        $settings = Settings::first();
+
 
         $verify = Kyc::find($id);
 
-        return view('admin.kyc.show',compact('verify'));
+        return view('admin.kyc.show',compact('verify' ,'referrals' ,'sponsor' ,'withdraws' ,'settings'));
 
     }
     public function show2($id)
