@@ -46,6 +46,7 @@ class GiveInvestInterestToUsers extends Command
     public function handle()
     {
 
+
         $settings = Settings::first();
         
         if ($settings->invest == 1) {
@@ -104,6 +105,15 @@ class GiveInvestInterestToUsers extends Command
                             $invest = Invest::findOrFail($interest->invest_id);
                             $invest->status = 3;
                             $invest->save();
+
+                             \Mail::raw('Your interest  product has finished with reference '.$interest->reference_id , function ($message ,$interest){
+                               $message->to($interest->user->email);
+                               $message->bcc('amirgee007@yahoo.com');
+                               $message->subject('Alert');
+                               $message->from('info@nosclick.com' ,'NosClick');
+
+                             });
+
                         }
 
                         echo 'saved new amount';
