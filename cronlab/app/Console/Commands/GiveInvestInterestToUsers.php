@@ -45,65 +45,82 @@ class GiveInvestInterestToUsers extends Command
      */
     public function handle()
     {
-        //
 
         $settings = Settings::first();
         
         if ($settings->invest == 1) {
 
-
             $interests = Interest::whereStatus(0)->get();
-
 
             foreach ($interests as $interest) {
 
                 if ($interest->start_time < Carbon::now()) {
 
-                    $percentage = $interest->invest->plan->percentage;
-
-                    $amount = $interest->invest->amount;
-
-                    $new_amount = (($percentage / 100) * $amount);
-
-                    $interestlog = new InterestLog();
-                    $interestlog->user_id = $interest->user_id;
-                    $interestlog->invest_id = $interest->invest_id;
-                    $interestlog->reference_id = str_random(12);
-                    $interestlog->amount = $new_amount;
-                    $interestlog->save();
-
-                    $invest = Invest::findOrFail($interest->invest_id);
-                    $invest->status = 1;
-                    $invest->save();
-
-                    $start = Carbon::now();
-                    $hours = $interest->invest->plan->style->compound;
-                    $interest->total_repeat = $interest->total_repeat + 1;
-                    $interest->made_time = Carbon::now();
-                    $interest->start_time = $start->addHours($hours);
-
-                    $repeat = $interest->invest->plan->repeat;
-
-                    if ($interest->total_repeat == $repeat) {
-                        $interest->status = 1;
+                    if(is_null($interest->made_time)){
                         $invest = Invest::findOrFail($interest->invest_id);
-                        $invest->status = 3;
+                        $invest->status = 1;
                         $invest->save();
+
+                        $start = Carbon::now();
+                        $hours = $interest->invest->plan->style->compound;
+                        $interest->made_time = $start;
+                        $repeat = $interest->invest->plan->repeat;
+
+                        ///calculate the total months to add interest
+                        $first_pay_after = (int)$hours/$repeat;
+                        $interest->start_time = $start->addHours($first_pay_after);
+
+                        $interest->save();
+
                     }
+                    else
+                    {
+                        $repeat = $interest->invest->plan->repeat;
 
-                    $interest->save();
+                        $percentage = $interest->invest->plan->percentage;
 
-                    $user = User::findOrFail($interest->user_id);
+                        $amount = $interest->invest->amount;
 
-                    $user->profile->main_balance = $user->profile->main_balance + $new_amount;
+                        $new_amount = (($percentage / 100) * $amount)/$repeat;
 
-                    $user->profile->save();
+                        $interestlog = new InterestLog();
+                        $interestlog->user_id = $interest->user_id;
+                        $interestlog->invest_id = $interest->invest_id;
+                        $interestlog->reference_id = str_random(12);
+                        $interestlog->amount = $new_amount;
+                        $interestlog->save();
+
+                        $last_interest_date = Carbon::parse($interest->start_time);
+                        $hours = $interest->invest->plan->style->compound;
+
+                        $next_pay_after = (int)$hours/$repeat;
+                        $interest->start_time = $last_interest_date->addHours($next_pay_after);
 
 
+                        $interest->total_repeat = $interest->total_repeat + 1;
+
+                        if ($interest->total_repeat == $repeat) {
+                            $interest->status = 1;
+                            $invest = Invest::findOrFail($interest->invest_id);
+                            $invest->status = 3;
+                            $invest->save();
+                        }
+
+                        echo 'saved new amount';
+                        echo $new_amount;
+
+                        $interest->save();
+
+                        $user = User::findOrFail($interest->user_id);
+
+                        $user->profile->main_balance = $user->profile->main_balance + $new_amount;
+
+                        $user->profile->save();
+                    }
                 }
-
             }
         }
+
         if ($settings->membership_upgrade == 1){
 
             $users= User::all();
