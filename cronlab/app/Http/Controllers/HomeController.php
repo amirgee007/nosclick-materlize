@@ -132,6 +132,7 @@ class HomeController extends Controller
         $user= Auth::user();
         $back = 'img/image_placeholder.jpg';
         $is_exist = Kyc::where('user_id' ,$user->id)->first();
+
         if($is_exist){
             session()->flash('message', 'you have Already submitted the verification');
             Session::flash('type', 'message');
@@ -149,6 +150,7 @@ class HomeController extends Controller
 
         ]);
 
+
         if ($request->hasFile('back')){
             $this->validate($request, [
                 'back' => 'required|image|mimes:jpg,jpeg,png,gif|max:3072'
@@ -157,6 +159,7 @@ class HomeController extends Controller
             $back = $request->back;
             $back_new_name = time().$back->getClientOriginalName();
             $back->move('uploads/verifications', $back_new_name);
+            $back= 'uploads/verifications/' . $back_new_name;
         }
 
             $front = $request->front;
@@ -176,8 +179,7 @@ class HomeController extends Controller
                 'status' => 0,
 
             ]);
-
-
+        
         $user->notify(new KYCVerifyAccept($user));
 
         session()->flash('message', 'Votre demande de vérification a été envoyée avec succès');
