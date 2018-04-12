@@ -221,11 +221,11 @@
                                                 <i class="material-icons" data-notify="icon">notifications</i>
                                                 <span data-notify="message">
 
-                                    @foreach($errors->all() as $error)
+                                                    @foreach($errors->all() as $error)
                                                         <li><strong> {{$error}} </strong></li>
                                                     @endforeach
 
-                            </span>
+                                                </span>
                                             </div>
                                         @endif
 
@@ -233,7 +233,7 @@
                                         <div class="row">
                                             <div class="col-md-3 col-md-offset-4">
                                                 <div class="form-group label-floating">
-                                                    <select class="selectpicker" name="name" data-style="btn btn-warning btn-round" title="Type de document" data-size="7">
+                                                    <select class="selectpicker" name="name" data-style="btn btn-warning btn-round" title="Type de document" data-size="7" required>
                                                         <option value="Bank Statement">Relevé bancaire</option>
                                                         <option value="Utility Bills">Factures divers</option>
                                                         <option value="Credit Card Statement">Relevé de carte de crédit</option>
@@ -253,7 +253,7 @@
                                                     <span class="btn btn-rose btn-round btn-file">
                                                         <span class="fileinput-new">Verso du document</span>
                                                         <span class="fileinput-exists">Changer le document</span>
-                                                        <input type="file" name="photo" />
+                                                        <input required type="file" name="photo" />
                                                     </span>
                                                         <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Effacer</a>
                                                     </div>
