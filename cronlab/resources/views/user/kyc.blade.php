@@ -117,8 +117,7 @@
                                     @foreach($errors->all() as $error)
                                                         <li><strong> {{$error}} </strong></li>
                                                     @endforeach
-
-                            </span>
+                                                </span>
                                             </div>
                                         @endif
 
@@ -143,13 +142,13 @@
 
                                                 <div class="form-group label-floating">
                                                     <label  class="control-label" for="number">Numéro du document</label>
-                                                    <input id="number" name="number" type="text" class="form-control">
+                                                    <input id="number" name="number" type="text" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-md-offset-1">
                                                 <div class="form-group label-floating">
                                                     <label  class="control-label" for="dob">Date de naissance</label>
-                                                    <input id="dob" name="dob" type="date" class="form-control">
+                                                    <input id="dob" name="dob" type="date" class="form-control" required>
                                                 </div>
                                             </div>
 
@@ -202,10 +201,6 @@
                                         <button type="submit" class="btn btn-success pull-right">Soumettre</button>
                                         <div class="clearfix"></div>
                                     </form>
-
-
-
-
                                 </div>
                             </div>
                         </div>

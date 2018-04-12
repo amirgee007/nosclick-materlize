@@ -130,9 +130,18 @@ class HomeController extends Controller
     public function kycSubmit(Request $request)
     {
         $user= Auth::user();
+        $back = 'img/image_placeholder.jpg';
+        $is_exist = Kyc::where('user_id' ,$user->id)->first();
+        if($is_exist){
+            session()->flash('message', 'you have Already submitted the verification');
+            Session::flash('type', 'message');
+            Session::flash('title', 'Already sent');
+
+            return redirect()->back();
+        }
+
 
         $this->validate($request, [
-
             'name'=> 'required|max:25',
             'front' => 'required|image|mimes:jpg,jpeg,png,gif|max:3072',
             'number' => 'required|max:50',
@@ -141,15 +150,14 @@ class HomeController extends Controller
         ]);
 
         if ($request->hasFile('back')){
-
             $this->validate($request, [
-
                 'back' => 'required|image|mimes:jpg,jpeg,png,gif|max:3072'
             ]);
 
             $back = $request->back;
             $back_new_name = time().$back->getClientOriginalName();
             $back->move('uploads/verifications', $back_new_name);
+        }
 
             $front = $request->front;
 
@@ -162,40 +170,13 @@ class HomeController extends Controller
                 'name' => $request->name,
                 'user_id' => $user->id,
                 'number' => $request->number,
-                'back' => 'uploads/verifications/' . $back_new_name,
+                'back' => $back,
                 'front' => 'uploads/verifications/' . $front_new_name,
                 'dob' => $request->dob,
                 'status' => 0,
 
             ]);
 
-            $user->notify(new KYCVerifyAccept($user));
-
-            session()->flash('message', 'Votre demande de vérification a été envoyée avec succès');
-            Session::flash('type', 'success');
-            Session::flash('title', 'Demande envoyée');
-
-            return redirect()->route('userKyc');
-
-        }
-
-        $front = $request->front;
-
-        $front_new_name = time().$front->getClientOriginalName();
-
-        $front->move('uploads/verifications', $front_new_name);
-
-        $kyc = Kyc::create([
-
-            'name' => $request->name,
-            'user_id' => $user->id,
-            'number' => $request->number,
-            'back' => 'img/image_placeholder.jpg',
-            'front' => 'uploads/verifications/' . $front_new_name,
-            'dob' => $request->dob,
-            'status' => 0,
-
-        ]);
 
         $user->notify(new KYCVerifyAccept($user));
 
