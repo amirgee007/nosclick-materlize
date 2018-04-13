@@ -39,7 +39,7 @@
 
                 <div class="card-content">
                     <h4 class="card-title">Transfert d'argent
-                      <small class="category"> - Interne ou vers un autre compte membre</small>
+                      <small class="category"> - Interne ou vers un autre compte membre less than 50</small>
                     </h4>
                     <br>
                     <br>
@@ -79,7 +79,7 @@
 
                                         
                                         <div class="wrap-input100 validate-input">
-                                                    <input id="amount" name="amount" type="number" class="input100">
+                                                    <input id="amount" name="amount" type="number" class="input100" min="0" max="50"  step="0.01">
                                             <span class="focus-input100"></span>
                                             <span class="label-input100">Montant en EURO</span>
                                     </div>
@@ -159,7 +159,7 @@
                                 
                                         
                                         <div class="wrap-input100 validate-input">
-                                         <input id="amount" name="amount" type="number" class="input100">
+                                         <input id="amount" name="amount" type="number" class="input100" min="0" max="50"  step="0.01">
                                             <span class="focus-input100"></span>
                                             <span class="label-input100">Montant en EURO</span>
                                         
