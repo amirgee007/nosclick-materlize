@@ -179,7 +179,7 @@ class HomeController extends Controller
                 'status' => 0,
 
             ]);
-        
+
         $user->notify(new KYCVerifyAccept($user));
 
         session()->flash('message', 'Votre demande de vérification a été envoyée avec succès');

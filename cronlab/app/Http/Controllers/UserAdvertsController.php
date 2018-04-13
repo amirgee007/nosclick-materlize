@@ -98,85 +98,93 @@ class UserAdvertsController extends Controller
 
     public function cashLinkConfirm($id)
     {
-        $user = Auth::user();
+        try {
 
-        $advert= Advert::findOrFail($id);
+            $user = Auth::user();
 
-        if ($advert-> status == 1){
+            $advert= Advert::findOrFail($id);
 
-            session()->flash('message', 'La publicité a déjà été vue.');
-            Session::flash('type', 'warning');
-            Session::flash('title', 'Infructueux');
+            if ($advert-> status == 1){
 
-            return redirect()->route('userCash.links');
+                session()->flash('message', 'La publicité a déjà été vue.');
+                Session::flash('type', 'warning');
+                Session::flash('title', 'Infructueux');
 
-
-        }
-        $advert->status = 1;
-        $advert->save();
-
-        $rewards = $advert->ptc->rewards;
-
-        $profile = $user->profile;
-
-        $profile->main_balance = $profile->main_balance + $rewards;
-
-        $profile->save();
-
-        $log = UserLog::create([
-
-            'user_id' => $user->id,
-            'reference' => str_random(12),
-            'for' => 'Lien payant',
-            'from' => 'Auto',
-            'details'=>'Vous avez reçu des gains directs (Lien PPC)',
-            'amount'=>$rewards,
-
-        ]);
+                return redirect()->route('userCash.links');
 
 
-        $upliner = Referral::whereUser_id($user->id)->count();
+            }
+            $advert->status = 1;
+            $advert->save();
 
-        if ($upliner == 1){
+            $rewards = $advert->ptc->rewards;
 
-            $settings = Settings::first();
+            $profile = $user->profile;
 
-            $referral = Referral::whereUser_id($user->id)->first();
+            $profile->main_balance = $profile->main_balance + $rewards;
 
-            $upliner = $referral->reflink->user->profile;
-
-            $percentage = $settings->referral_advert;
-
-            $commission = (($percentage / 100) * $rewards);
-
-            $upliner->referral_balance = $upliner->referral_balance + $commission;
-
-            $upliner->save();
-
+            $profile->save();
 
             $log = UserLog::create([
 
-                'user_id' => $referral->reflink->user->id,
+                'user_id' => $user->id,
                 'reference' => str_random(12),
-                'for' => 'Parrainage',
-                'from' => $user->name,
-                'details'=>'Vous avez reçu un bonus de parrainage (Lien PPC)',
-                'amount'=>$commission,
+                'for' => 'Lien payant',
+                'from' => 'Auto',
+                'details'=>'Vous avez reçu des gains directs (Lien PPC)',
+                'amount'=>$rewards,
 
             ]);
 
 
+            $upliner = Referral::whereUser_id($user->id)->count();
+
+            if ($upliner == 1){
+
+                $settings = Settings::first();
+
+                $referral = Referral::whereUser_id($user->id)->first();
+
+                $upliner = $referral->reflink->user->profile;
+
+                $percentage = $settings->referral_advert;
+
+                $commission = (($percentage / 100) * $rewards);
+
+                $upliner->referral_balance = $upliner->referral_balance + $commission;
+
+                $upliner->save();
+
+
+                $log = UserLog::create([
+
+                    'user_id' => $referral->reflink->user->id,
+                    'reference' => str_random(12),
+                    'for' => 'Parrainage',
+                    'from' => $user->name,
+                    'details'=>'Vous avez reçu un bonus de parrainage (Lien PPC)',
+                    'amount'=>$commission,
+
+                ]);
+
+            }
+
+            session()->flash('message', 'Annonce vu avec succès');
+            Session::flash('type', 'success');
+            Session::flash('title', 'Confirmer avec succès');
+
+
+            return redirect()->route('userCash.links');
+
+
+
+        } catch (\Exception $ex) {
+            session()->flash('message', 'Some data is missing of your referal.');
+            Session::flash('type', 'warning');
+            Session::flash('title', 'Infructueux');
+            return redirect()->route('userCash.links');
+
         }
-
-
-
-
-        session()->flash('message', 'Annonce vu avec succès');
-        Session::flash('type', 'success');
-        Session::flash('title', 'Confirmer avec succès');
-
-
-        return redirect()->route('userCash.links');
 
 
     }
